@@ -218,6 +218,10 @@ const VQAMain = () => {
 
   const getImages = async () => {
     try {
+
+      // const response = await fetch(`http://127.0.0.1:5000/loadimage?image=${encodeURIComponent(image)}`);
+      // const data = await response.json();
+
       const data = a;
       const imagesRes = data.map(d => { 
         const decodedImage = atob(d.image)
