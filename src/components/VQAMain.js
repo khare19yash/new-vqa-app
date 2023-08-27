@@ -223,7 +223,7 @@ const a = [
 ];
 
 const VQAMain = () => {
-  const [selectedDateset, setDataset] = useState(datasets[0].id);
+  const [selectedDateset, setDataset] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState([]);
   const [filterediImages, setFilterediImages] = useState([]);

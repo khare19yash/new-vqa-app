@@ -5,7 +5,7 @@ import VQAMain from "./components/VQAMain";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#7be6a8",
+      main: "#4aa16e",
     },
   },
 });
