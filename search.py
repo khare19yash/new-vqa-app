@@ -44,15 +44,35 @@ def get_menu():
 def get_questions():
     dataset = request.args.get('dataset')
     image = request.args.get('image')
-    collection = db[dataset]
     
-    result = collection.find_one({'image_name': image})
-    if result:
-        questions = result['questions']
+    if dataset == 'vqarad':
+        questions = get_vqarad_questions(dataset,image)
+    elif dataset == 'deepeyenet':
+        questions = get_deepeyenet_questions(dataset,image)
     else:
         questions = None
     response = {'questions' : questions}
     return jsonify(response)
+
+
+def get_vqarad_questions(dataset,image):
+    image = request.args.get('image')
+    collection = db[dataset]
+    questions = []
+    result = collection.find_one({'image_name': image})
+    if result:
+        questions = result['questions']
+    return questions
+
+def get_deepeyenet_questions(dataset,image):
+    image = request.args.get('image')
+    collection = db[dataset]
+    questions = []
+    result = collection.find_one({'image_name': image})
+    if result:
+        questions.append(result['caption'])
+    return questions
+
 
 
 

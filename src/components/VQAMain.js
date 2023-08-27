@@ -8,14 +8,17 @@ const datasets = [
   {
     label: "ROCO",
     id: "roco",
+    type: "caption"
   },
   {
     label: "VQARAD",
     id: "vqarad",
+    type: "vqa"
   },
   {
     label: "DeepEyeNet",
     id: "deepeyenet",
+    type: "caption"
   },
 ];
 
