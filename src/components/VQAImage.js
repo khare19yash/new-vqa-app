@@ -57,7 +57,7 @@ const VQAImage = ({ image }) => {
           />
         </ImageListItem>
       </Grow>
-      {showChat && <VQAImageChat onClose={onCloseChat} />}
+      {showChat && <VQAImageChat onClose={onCloseChat} imageUrl={image.image} />}
     </>
   );
 };
