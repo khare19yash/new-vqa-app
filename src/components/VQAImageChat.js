@@ -10,7 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const sampleChat = [
   {
@@ -27,9 +27,9 @@ const sampleChat = [
   },
 ];
 
-const ChatBox = ({ chats }) => {
+const ChatBox = ({ chats, onClickQuestion }) => {
   return (
-    <Box width={400} display={"flex"} flexDirection={"column"} gap={2} p={2}>
+    <Box width={400} display={"flex"} flexDirection={"column"} gap={1} p={2}>
       {chats.map((chat) => {
         if (chat.data === "image") {
           return (
@@ -56,19 +56,22 @@ const ChatBox = ({ chats }) => {
               justifyContent={chat.type === "user" ? "flex-end" : "flex-start"}
             >
               <Box
-                px={2}
                 display={"flex"}
                 py={1}
                 alignItems={"start"}
                 flexDirection={"column"}
-                borderRadius={"16px"}
-                bgcolor={chat.type !== "user" ? "#adfbce" : "#eeeeee"}
+                gap={1}
               >
                 {chat.message.map((q) => (
-                  <Box component={ButtonBase} >
-                    <Typography>
-                    {q}
-                    </Typography>
+                  <Box
+                    component={ButtonBase}
+                    onClick={() => onClickQuestion(q)}
+                    bgcolor={chat.type !== "user" ? "#adfbce" : "#eeeeee"}
+                    p={1}
+                    py={0.3}
+                    borderRadius={"16px"}
+                  >
+                    <Typography>{q}</Typography>
                   </Box>
                 ))}
               </Box>
@@ -99,6 +102,18 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
   const [chats, setChats] = useState([]);
   const [text, setText] = useState("");
 
+  const divRef = useRef(null);
+
+  useEffect(() => {
+    const divElement = divRef.current;
+    if(divElement){
+        divElement.scrollTo({
+            top: divElement.scrollHeight,
+            behavior: 'smooth'
+          });
+    }
+  }, [chats]);
+
   useEffect(() => {
     setChats([
       {
@@ -108,11 +123,11 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
       },
       {
         type: "ai",
-        message: "Suggestion for this image!",
+        message: "Suggestion question for this image!",
       },
       {
         type: "ai",
-        message: ["What is my name?", "what is this?"],
+        message: ["What is my name?", "What is this?", "What is my goal?"],
         data: "questions",
       },
     ]);
@@ -128,6 +143,16 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
     }
   };
 
+  const onClickQuestion = (value) => {
+    setChats([
+      ...chats,
+      {
+        type: "user",
+        message: value,
+      },
+    ]);
+  };
+
   const onAddChat = () => {
     setChats([
       ...chats,
@@ -141,9 +166,8 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
 
   return (
     <Dialog open={true} onClose={onClose}>
-      <DialogTitle>Ask me!</DialogTitle>
-      <DialogContent>
-        <ChatBox chats={chats} />
+      <DialogContent ref={divRef} component={Box}>
+        <ChatBox chats={chats} onClickQuestion={onClickQuestion} />
         <TextField
           fullWidth
           variant="standard"
