@@ -4,7 +4,7 @@ import VQAImage from "./VQAImage";
 import { Box, CircularProgress, ImageList } from "@mui/material";
 
 const VQAImages = ({ images, isLoading }) => {
-  if(true){
+  if(isLoading){
     return <Box display="flex" pt={2} px={8} width={1} justifyContent={"center"} height={400}  alignItems={"center"}>
         <CircularProgress />
     </Box>
