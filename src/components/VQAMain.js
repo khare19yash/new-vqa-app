@@ -12,6 +12,10 @@ const datasets = [
     label: "VQRAD",
     id: "vqarad",
   },
+  {
+    label: "DeepEyeNet",
+    id: "deepeyenet",
+  },
 ];
 
 const data = [
