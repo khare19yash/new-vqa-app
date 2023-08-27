@@ -29,7 +29,7 @@ const sampleChat = [
 
 const ChatBox = ({ chats, onClickQuestion }) => {
   return (
-    <Box width={400} display={"flex"} flexDirection={"column"} gap={1} p={2}>
+    <Box width={1} display={"flex"} flexDirection={"column"} gap={1} p={2}>
       {chats.map((chat) => {
         if (chat.data === "image") {
           return (

@@ -12,10 +12,11 @@ const VQAHeader = ({
 }) => {
   return (
     <Box
-      px={8}
       py={1}
-      pb={1}
+      pb={2}
       display={"flex"}
+      gap={1}
+      sx={{ flexDirection: { xs: 'column', md: 'row' }, px:  { xs: 1, md: 8 },}}
       alignItems={"center"}
       position={"fixed"}
       top={0}
@@ -26,7 +27,7 @@ const VQAHeader = ({
       <Box>
         <img src={"/logo.svg"} style={{ height: 48 }} />
       </Box>
-      <Box px={2} width={0.4}>
+      <Box px={2} width={{ xs: 1, md: .4 }}>
         <TextField
           fullWidth
           id="standard-basic"
@@ -38,7 +39,7 @@ const VQAHeader = ({
       </Box>
       <Box flexGrow={1} />
       {!selectedDataset && (
-        <Box pr={3} display={"flex"} gap={2} className="fade-in-out" borderRadius={"16px"}  py={1} px={2} mr={2}>
+        <Box pr={3} display={"flex"} gap={2} className="fade-in-out" borderRadius={"16px"}  py={0} px={2} mr={2}>
           <Typography>Select dataset</Typography>
           <EastIcon />
         </Box>
