@@ -1,12 +1,15 @@
-import { Box, Chip, Typography } from "@mui/material";
+import { Box, Chip, TextField, Typography } from "@mui/material";
 import React from "react";
 import DoneIcon from "@mui/icons-material/Done";
 
-const VQAHeader = ({ datasets, onDatasetClick, selectedDataset = "roco" }) => {
+const VQAHeader = ({ datasets, onDatasetClick, searchQueury, onChangeSearch, selectedDataset = "roco" }) => {
   return (
-    <Box px={8} py={2} display={"flex"}>
+    <Box px={8} py={1} pb={0} display={"flex"} alignItems={"end"}>
       <Box>
-        <Typography variant="h5">AskMediScan</Typography>
+        <img src={"/logo.svg"} style={{height: 48}} />
+      </Box>
+      <Box px={2} width={.4}>
+        <TextField fullWidth id="standard-basic" label="Search" variant="standard" value={searchQueury} onChange={onChangeSearch} />
       </Box>
       <Box flexGrow={1} />
       <Box gap={2} display={"flex"}>
