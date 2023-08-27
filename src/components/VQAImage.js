@@ -1,21 +1,39 @@
-import { Box, ButtonBase, ImageListItem, ImageListItemBar } from "@mui/material";
-import IconButton from '@mui/material/IconButton';
-import InfoIcon from '@mui/icons-material/Info';
+import {
+  Box,
+  ButtonBase,
+  Grow,
+  ImageListItem,
+  ImageListItemBar,
+} from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import InfoIcon from "@mui/icons-material/Info";
+import { useEffect, useState } from "react";
 
 const VQAImage = ({ image }) => {
+  const [show, setShow] = useState(false);
+  
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
+
   return (
-    <ImageListItem key={image.id} style={{borderRadius: 16 }} component={ButtonBase}>
-      <img
-        src={`${image.image}`}
-        srcSet={`${image.image}`}
-        alt={image.title}
-        loading="lazy"
-        style={{borderRadius: 16 }}
-      />
-      <ImageListItemBar
-        title={image.title}
-        subtitle={image.caption}
-        style={{borderRadius: 16 }}
+    <Grow in={show}>
+      <ImageListItem
+        key={image.id}
+        style={{ borderRadius: 16 }}
+        component={ButtonBase}
+      >
+        <img
+          src={`${image.image}`}
+          srcSet={`${image.image}`}
+          alt={image.title}
+          loading="lazy"
+          style={{ borderRadius: 16 }}
+        />
+        <ImageListItemBar
+          title={image.title}
+          subtitle={image.caption}
+          style={{ borderRadius: 16 }}
           actionIcon={
             <IconButton
               sx={{ color: "rgba(255, 255, 255, 0.54)" }}
@@ -24,12 +42,12 @@ const VQAImage = ({ image }) => {
               <InfoIcon />
             </IconButton>
           }
-      />
-    </ImageListItem>
+        />
+      </ImageListItem>
+    </Grow>
   );
 };
 
-const styles = {  
-};
+const styles = {};
 
 export default VQAImage;

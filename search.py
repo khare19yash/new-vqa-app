@@ -114,7 +114,18 @@ def load_image():
 @cross_origin()
 def get_images():
     dataset = request.args.get('dataset')
-    collection = db[dataset]
+    data = []
+    if dataset == 'vqarad':
+        data = get_vqarad_images()
+    elif dataset == 'deepeyenet':
+        data = get_deepeyenet_images()
+
+
+    return jsonify(data)
+
+
+def get_vqarad_images():
+    collection = db['vqarad']
     results = collection.find()
     data = []
     if results:
@@ -130,9 +141,34 @@ def get_images():
                 'image_name': image_name,
                 'caption': f"This is an image of {organ}"
             })
-            # if i == 100:
-            #     break
-    return jsonify(data)  
+    return data
+
+
+def get_deepeyenet_images():
+    collection = db['deepeyenet']
+    results = collection.find()
+    data = []
+    if results:
+        for i,result in enumerate(results):
+            image_data = result['image']
+            image_name = result['image_name']
+            caption = result['caption']
+            keywords = result['keywords']
+            encoded_image = base64.b64encode(image_data).decode('utf-8')
+            data.append({
+                'image': encoded_image,
+                'image_name': image_name,
+                'caption': caption,
+                'keywords': keywords
+            })
+            if i == 1000:
+                break
+    return data
+
+
+
+    
+      
 
 
     
