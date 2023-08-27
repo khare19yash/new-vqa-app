@@ -11,6 +11,10 @@ const datasets = [
     label: "VQRAD",
     id: "vqarad",
   },
+  {
+    label: "DeepEyeNet",
+    id: "deepeyenet",
+  },
 ];
 
 const data = [
@@ -86,10 +90,7 @@ const VQAMain = () => {
   };
 
   useEffect(() => {
-
     getImages()
-
-    
   }, [selectedDateset])
 
   const getImages = async () => {
@@ -109,8 +110,8 @@ const VQAMain = () => {
 
         return {
           'image': imageUrl,
-          'title': d.organ,
-          'caption' : `This is an image of ${d.organ}` ,
+          'title': d.title,
+          'caption' : d.caption ,
           'id' : d.image_name
         }
        }))

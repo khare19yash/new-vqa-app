@@ -7,8 +7,7 @@ from PIL import Image
 # import gridfs
 from gridfs import GridFS
 import base64
-
-    
+from fuzzywuzzy import fuzz, process
 
 app = Flask(__name__)
 CORS(app) # allow CORS for all routes
@@ -18,6 +17,16 @@ client = MongoClient('mongodb://localhost:27017/')
 db = client['mymedicaldb']
 collection = db['vqarad']
 
+def get_correct_answer(query,questions,answers):
+    best_match = process.extractOne(query, questions)
+    best_match_ques = best_match[0]
+    best_match_score = best_match[1]
+    idx = questions.index(best_match_ques)
+    answer = answers[idx]
+    print(f"Best Match {best_match_ques}")
+    return answer,best_match_ques,best_match_score
+    
+
 
 @app.route('/menu',methods=['GET'])
 @cross_origin()
@@ -25,7 +34,7 @@ def get_menu():
     collection = db['vqarad']
     menu_items = []
     for file in collection.find():
-        menu_items.append({'value': file['image_name'],'label': file['image_name']})
+        menu_items.append({'image_data': file['image'],'title': file['image_name'],'caption': file['image_name']})
     return jsonify(menu_items)
 
 
@@ -36,7 +45,7 @@ def get_autocomplete():
     collection = db['vqarad']
     questions = []
     for file in collection.find():
-        questions.append(file['preproc_questions'])
+        questions.append(file['questions'])
     questions = [q for ques_list in questions for q in ques_list]
     
     response = {'questions' : questions}
@@ -56,9 +65,9 @@ def get_answer():
     
     result = collection.find_one({'image_name': image})
     if result:
-        questions = result['preproc_questions']
+        questions = result['questions']
         answers = result['answers']
-        text_response = answers[0]
+        answer,best_match_ques,best_match_score = get_correct_answer(query,questions,answers)
 #         for i,q in enumerate(questions):
 #             if(q == query):
 #                 text_response = answers[i]
@@ -66,12 +75,16 @@ def get_answer():
 #         text_response = answers[0]
         
     else:
-        text_response = "No data"
+        answer = "NA"
+        best_match_ques = "NA"
+        best_match_score = -1
 
     return jsonify({
-        'answer': text_response,
+        'answer': answer,
+        'question': best_match_ques,
+        'score': best_match_score
+        
     })
-
 
 @app.route('/loadimage',methods=['GET'])
 @cross_origin()
@@ -96,6 +109,7 @@ def load_image():
     })
 
 
+
 @app.route('/getimages',methods=['GET'])
 @cross_origin()
 def get_images():
@@ -112,8 +126,9 @@ def get_images():
             encoded_image = base64.b64encode(image_data).decode('utf-8')
             data.append({
                 'image': encoded_image,
-                'organ' : organ,
-                'image_name': image_name
+                'title' : organ,
+                'image_name': image_name,
+                'caption': f"This is an image of {organ}"
             })
             # if i == 100:
             #     break
