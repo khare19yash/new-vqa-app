@@ -9,7 +9,7 @@ const datasets = [
     id: "roco",
   },
   {
-    label: "VQRAD",
+    label: "VQARAD",
     id: "vqarad",
   },
   {
