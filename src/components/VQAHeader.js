@@ -8,8 +8,8 @@ const VQAHeader = ({ datasets, onDatasetClick, searchQueury, onChangeSearch, sel
       <Box>
         <img src={"/logo.svg"} style={{height: 48}} />
       </Box>
-      <Box px={2} width={.4}>
-        <TextField fullWidth id="standard-basic" label="Search" variant="standard" value={searchQueury} onChange={onChangeSearch} />
+      <Box px={2} width={.4} pb={1}>
+        <TextField fullWidth id="standard-basic" placeholder="Search" variant="standard" value={searchQueury} onChange={onChangeSearch} />
       </Box>
       <Box flexGrow={1} />
       <Box gap={2} display={"flex"}>
