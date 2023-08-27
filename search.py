@@ -39,52 +39,51 @@ def get_menu():
 
 
 
-@app.route('/autocomplete',methods=['GET'])
+@app.route('/getquestions',methods=['GET'])
 @cross_origin()
-def get_autocomplete():
-    collection = db['vqarad']
-    questions = []
-    for file in collection.find():
-        questions.append(file['questions'])
-    questions = [q for ques_list in questions for q in ques_list]
-    
-    response = {'questions' : questions}
-    
-    return jsonify(response)
-
-
-
-@app.route('/getanswer',methods=['GET'])
-@cross_origin()
-def get_answer():
-    query = request.args.get('query')
+def get_questions():
+    dataset = request.args.get('dataset')
     image = request.args.get('image')
-    
-    print("Query is ------")
-    print(query)
+    collection = db[dataset]
     
     result = collection.find_one({'image_name': image})
     if result:
         questions = result['questions']
-        answers = result['answers']
-        answer,best_match_ques,best_match_score = get_correct_answer(query,questions,answers)
-#         for i,q in enumerate(questions):
-#             if(q == query):
-#                 text_response = answers[i]
-        
-#         text_response = answers[0]
-        
     else:
-        answer = "NA"
-        best_match_ques = "NA"
-        best_match_score = -1
+        questions = None
+    response = {'questions' : questions}
+    return jsonify(response)
 
-    return jsonify({
-        'answer': answer,
-        'question': best_match_ques,
-        'score': best_match_score
-        
-    })
+
+
+@app.route('/getanswer',methods=['POST'])
+@cross_origin()
+def get_answer():
+    try:
+        data = request.get_json()
+        dataset = data['dataset']
+        image = data['image']
+        question = data['question']
+
+        collection = db[dataset]
+        result = collection.find_one({'image_name': image})
+        if result:
+            questions = result['questions']
+            answers = result['answers']
+            answer,best_match_ques,best_match_score = get_correct_answer(question,questions,answers)
+        else:
+            answer = "NA"
+            best_match_ques = "NA"
+            best_match_score = -1
+
+        return jsonify({
+            'answer': answer,
+            'question': best_match_ques,
+            'score': best_match_score
+            
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
 
 @app.route('/loadimage',methods=['GET'])
 @cross_origin()
@@ -166,18 +165,18 @@ def get_deepeyenet_images():
 
 
 
-@app.route('/getimages',methods=['POST'])
-@cross_origin()
-def get_images():
-    dataset = request.args.get('dataset')
-    if dataset == 'vqarad':
-        data = get_vqarad_images()
-    elif dataset == 'deepeyenet':
-        data = get_deepeyenet_images()
-    else:
-        data = []
-    return jsonify(data)
-    
+# @app.route('/getimages',methods=['POST'])
+# @cross_origin()
+# def get_images():
+#     dataset = request.args.get('dataset')
+#     if dataset == 'vqarad':
+#         data = get_vqarad_images()
+#     elif dataset == 'deepeyenet':
+#         data = get_deepeyenet_images()
+#     else:
+#         data = []
+#     return jsonify(data)
+
 
     
       

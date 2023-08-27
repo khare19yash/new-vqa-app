@@ -4,7 +4,7 @@ import VQAImage from "./VQAImage";
 import { Box, CircularProgress, ImageList, useMediaQuery } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
-const VQAImages = ({ images, isLoading }) => {
+const VQAImages = ({ images, isLoading, dataset }) => {
   const theme = useTheme();
   const matchesSM = useMediaQuery(theme.breakpoints.down('sm'));
   const matchesMD = useMediaQuery(theme.breakpoints.between('md', 'lg'));
@@ -27,7 +27,7 @@ const VQAImages = ({ images, isLoading }) => {
     <Box display="flex" pt={2} px={{ xs: 1, md: 8 }}>
       <ImageList cols={cols} sx={{ width: "100%", height: "100%"}} gap={16}>
         {images.map((image) => {
-          return <VQAImage image={image} />;
+          return <VQAImage image={image} dataset={dataset} />;
         })}
       </ImageList>
     </Box>

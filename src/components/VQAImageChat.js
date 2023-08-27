@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
+import axios from "axios";
 
 const sampleChat = [
   {
@@ -98,9 +99,11 @@ const ChatBox = ({ chats, onClickQuestion }) => {
   );
 };
 
-const VQAImageChat = ({ onClose, imageUrl }) => {
+const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
   const [chats, setChats] = useState([]);
   const [text, setText] = useState("");
+
+  const [questions, setQuestions] = useState([]);
 
   const divRef = useRef(null);
 
@@ -115,23 +118,38 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
   }, [chats]);
 
   useEffect(() => {
-    setChats([
-      {
-        type: "user",
-        message: imageUrl,
-        data: "image",
-      },
-      {
-        type: "ai",
-        message: "Suggestion question for this image!",
-      },
-      {
-        type: "ai",
-        message: ["What is my name?", "What is this?", "What is my goal?"],
-        data: "questions",
-      },
-    ]);
+    getQuestions()
   }, []);
+
+
+  const getQuestions = async () => {
+    try {
+      axios.get(`http://127.0.0.1:5000/getquestions?image=${imageName}&dataset=${dataset}`).then(response => {
+        const data = response.data;
+        const questions = data.questions;
+        setChats([
+          {
+            type: "user",
+            message: imageUrl,
+            data: "image",
+          },
+          {
+            type: "ai",
+            message: "Suggestion question for this image!",
+          },
+          {
+            type: "ai",
+            message: questions,
+            data: "questions",
+          },
+        ]);
+
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   const onType = (event) => {
     setText(event.target.value);
@@ -151,6 +169,12 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
         message: value,
       },
     ]);
+    setQuestions([
+      ...chats,
+      {
+        question: value,
+      },
+    ]);
   };
 
   const onAddChat = () => {
@@ -161,8 +185,44 @@ const VQAImageChat = ({ onClose, imageUrl }) => {
         message: text,
       },
     ]);
+    setQuestions([
+      ...chats,
+      {
+        question: text,
+      },
+    ]);
     setText("");
   };
+
+  useEffect(() => {
+    getAnswer();
+  }, [questions]);
+
+  const getAnswer = async () => {
+    try {
+      const url = 'http://127.0.0.1:5000/getanswer';
+      const data = {
+      'image': imageName,
+      'dataset': dataset,
+      'question': questions[questions.length-1].question
+      };
+      axios.post(url,data).then(response => {
+        const data = response.data;
+        const answer = data.answer;
+        setChats([
+          ...chats,
+          {
+            type: "user",
+            message: answer,
+          },
+        ]);
+        setText("");
+      }, 1000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <Dialog open={true} onClose={onClose}>

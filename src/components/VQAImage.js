@@ -12,7 +12,7 @@ import VQAImageChat from "./VQAImageChat";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import FullscreenIcon from '@mui/icons-material/Fullscreen';
 
-const VQAImage = ({ image }) => {
+const VQAImage = ({ image, dataset }) => {
   const [show, setShow] = useState(false);
   const [showChat, setShowChat] = useState(false);
 
@@ -63,7 +63,7 @@ const VQAImage = ({ image }) => {
         </ImageListItem>
       </Grow>
       {showChat && (
-        <VQAImageChat onClose={onCloseChat} imageUrl={image.image} />
+        <VQAImageChat onClose={onCloseChat} imageUrl={image.image} imageName={image.id} dataset={dataset} />
       )}
     </>
   );
