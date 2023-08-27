@@ -15,62 +15,62 @@ const datasets = [
 
 const data = [
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Rajrshi",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Tash",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "yash",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Title",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Rajrshi",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Tash",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "yash",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Title",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Rajrshi",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Tash",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "yash",
     caption: "Image Caption",
   },
   {
-    image: "https://www.jquery-az.com/html/images/banana.jpg",
+    image: "https://media.istockphoto.com/id/1276764885/photo/two-bunches-of-banana-fruit-on-a-matte-background.jpg?s=1024x1024&w=is&k=20&c=tcIKMY6G4hyveBHFSV8SnDb2iH2eGSxFWB-5nlcQiq8=",
     title: "Title",
     caption: "Image Caption",
   },
@@ -81,6 +81,9 @@ const VQAMain = () => {
     const setSelectedDatasetId = (id) => {
         return setDataset(id)
     }
+
+    
+
   return (
     <div>
       <VQAHeader datasets={datasets} onDatasetClick={setSelectedDatasetId} selectedDataset={selectedDateset} />
