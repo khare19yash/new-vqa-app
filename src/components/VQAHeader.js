@@ -38,7 +38,7 @@ const VQAHeader = ({
       </Box>
       <Box flexGrow={1} />
       {!selectedDataset && (
-        <Box pr={3} display={"flex"} gap={2} className="fade-in-out">
+        <Box pr={3} display={"flex"} gap={2} className="fade-in-out" borderRadius={"16px"} bgcolor={"#90c9a8"} py={1} px={2} mr={2}>
           <Typography>Please select the dataset</Typography>
           <EastIcon />
         </Box>
