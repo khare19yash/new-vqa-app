@@ -1,4 +1,4 @@
-import { ThemeProvider, createTheme } from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import "./App.css";
 import VQAMain from "./components/VQAMain";
 
@@ -13,6 +13,7 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <div className="App">
         <VQAMain />
       </div>
