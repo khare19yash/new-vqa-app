@@ -1,10 +1,10 @@
-import { Box, ImageListItem, ImageListItemBar } from "@mui/material";
+import { Box, ButtonBase, ImageListItem, ImageListItemBar } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 
 const VQAImage = ({ image }) => {
   return (
-    <ImageListItem key={image.id} style={{borderRadius: 16 }}>
+    <ImageListItem key={image.id} style={{borderRadius: 16 }} component={ButtonBase}>
       <img
         src={`${image.image}`}
         srcSet={`${image.image}`}
