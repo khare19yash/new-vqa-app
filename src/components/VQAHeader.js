@@ -1,24 +1,22 @@
 import { Box, Chip, Typography } from "@mui/material";
 import React from "react";
-import DoneIcon from '@mui/icons-material/Done';
-
-
+import DoneIcon from "@mui/icons-material/Done";
 
 const VQAHeader = ({ datasets, onDatasetClick, selectedDataset = "roco" }) => {
   return (
     <Box px={8} py={2} display={"flex"}>
       <Box>
-        <Typography variant="h5">Image Viewer</Typography>
+        <Typography variant="h5">AskMediScan</Typography>
       </Box>
       <Box flexGrow={1} />
       <Box gap={2} display={"flex"}>
         {datasets.map((dataset) => (
           <Chip
             variant={selectedDataset === dataset.id ? "filled" : "outlined"}
-			icon={selectedDataset === dataset.id ? <DoneIcon /> : null}
+            icon={selectedDataset === dataset.id ? <DoneIcon /> : null}
             label={dataset.label}
             onClick={() => onDatasetClick(dataset.id)}
-			color={selectedDataset === dataset.id ? "primary" : "default"}
+            color={selectedDataset === dataset.id ? "primary" : "default"}
           />
         ))}
       </Box>

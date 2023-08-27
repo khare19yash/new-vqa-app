@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import VQAImages from "./VQAImages";
 import VQAHeader from "./VQAHeader";
 
 const datasets = [
-    {
-      label: "ROCO",
-      id: "roco",
-    },
-    {
-      label: "VQRAD",
-      id: "vqrad",
-    },
-  ];
+  {
+    label: "ROCO",
+    id: "roco",
+  },
+  {
+    label: "VQRAD",
+    id: "vqrad",
+  },
+];
 
 const data = [
   {
@@ -77,15 +77,31 @@ const data = [
 ];
 
 const VQAMain = () => {
+<<<<<<< HEAD
     const [selectedDateset, setDataset] = useState(datasets[0].id)
     const setSelectedDatasetId = (id) => {
         return setDataset(id)
     }
 
+=======
+  const [selectedDateset, setDataset] = useState(datasets[0].id);
+  const setSelectedDatasetId = (id) => {
+    return setDataset(id);
+  };
+
+  useEffect(() => {
+
+    //api call
+  }, [selectedDateset])
+>>>>>>> d8d4c54477b9006aea902370ce755b36edd74780
 
   return (
     <div>
-      <VQAHeader datasets={datasets} onDatasetClick={setSelectedDatasetId} selectedDataset={selectedDateset} />
+      <VQAHeader
+        datasets={datasets}
+        onDatasetClick={setSelectedDatasetId}
+        selectedDataset={selectedDateset}
+      />
       <VQAImages images={data} />
     </div>
   );

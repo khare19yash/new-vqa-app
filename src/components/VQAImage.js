@@ -2,7 +2,7 @@ import { Box, ImageListItem, ImageListItemBar } from "@mui/material";
 import IconButton from '@mui/material/IconButton';
 import InfoIcon from '@mui/icons-material/Info';
 
-const VQAImages = ({ image }) => {
+const VQAImage = ({ image }) => {
   return (
     <ImageListItem>
       <img
@@ -27,34 +27,7 @@ const VQAImages = ({ image }) => {
   );
 };
 
-const styles = {
-  card: {
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-    display: "flex",
-    flexDirection: "column",
-    maxWidth: "300px",
-    overflow: "hidden",
-  },
-  image: {
-    width: "100%",
-    height: "auto",
-    borderTopLeftRadius: "8px",
-    borderTopRightRadius: "8px",
-  },
-  content: {
-    padding: "1rem",
-  },
-  title: {
-    margin: "0",
-    fontSize: "1.25rem",
-  },
-  caption: {
-    margin: "0",
-    color: "#666",
-    fontSize: "0.875rem",
-  },
+const styles = {  
 };
 
-export default VQAImages;
+export default VQAImage;
