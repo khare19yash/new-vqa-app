@@ -4,16 +4,18 @@ import InfoIcon from '@mui/icons-material/Info';
 
 const VQAImage = ({ image }) => {
   return (
-    <ImageListItem key={image.id}>
+    <ImageListItem key={image.id} style={{borderRadius: 16 }}>
       <img
         src={`${image.image}`}
         srcSet={`${image.image}`}
         alt={image.title}
         loading="lazy"
+        style={{borderRadius: 16 }}
       />
       <ImageListItemBar
         title={image.title}
         subtitle={image.caption}
+        style={{borderRadius: 16 }}
           actionIcon={
             <IconButton
               sx={{ color: "rgba(255, 255, 255, 0.54)" }}
