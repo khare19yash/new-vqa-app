@@ -4,7 +4,7 @@ import DoneIcon from "@mui/icons-material/Done";
 
 const VQAHeader = ({ datasets, onDatasetClick, searchQueury, onChangeSearch, selectedDataset = "roco" }) => {
   return (
-    <Box px={8} py={1} pb={0} display={"flex"} alignItems={"center"} position={"fixed"} top={0} width={1}>
+    <Box px={8} py={1} pb={1} display={"flex"} alignItems={"center"} position={"fixed"} top={0} width={1} zIndex={100} bgcolor={"#e8efeb"}>
       <Box>
         <img src={"/logo.svg"} style={{height: 48}} />
       </Box>
