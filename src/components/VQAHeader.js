@@ -4,11 +4,11 @@ import DoneIcon from "@mui/icons-material/Done";
 
 const VQAHeader = ({ datasets, onDatasetClick, searchQueury, onChangeSearch, selectedDataset = "roco" }) => {
   return (
-    <Box px={8} py={1} pb={0} display={"flex"} alignItems={"end"}>
+    <Box px={8} py={1} pb={0} display={"flex"} alignItems={"center"}>
       <Box>
         <img src={"/logo.svg"} style={{height: 48}} />
       </Box>
-      <Box px={2} width={.4} pb={1}>
+      <Box px={2} width={.4} >
         <TextField fullWidth id="standard-basic" placeholder="Search" variant="standard" value={searchQueury} onChange={onChangeSearch} />
       </Box>
       <Box flexGrow={1} />
