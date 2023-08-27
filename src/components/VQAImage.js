@@ -4,10 +4,10 @@ import InfoIcon from '@mui/icons-material/Info';
 
 const VQAImage = ({ image }) => {
   return (
-    <ImageListItem>
+    <ImageListItem key={image.id}>
       <img
-        src={`${image.image}?w=148&fit=crop&auto=format`}
-        srcSet={`${image.image}w=148&fit=crop&auto=format&dpr=2 2x`}
+        src={`${image.image}`}
+        srcSet={`${image.image}`}
         alt={image.title}
         loading="lazy"
       />

@@ -9,7 +9,7 @@ const datasets = [
   },
   {
     label: "VQRAD",
-    id: "vqrad",
+    id: "vqarad",
   },
 ];
 
@@ -77,23 +77,48 @@ const data = [
 ];
 
 const VQAMain = () => {
-<<<<<<< HEAD
-    const [selectedDateset, setDataset] = useState(datasets[0].id)
-    const setSelectedDatasetId = (id) => {
-        return setDataset(id)
-    }
-
-=======
   const [selectedDateset, setDataset] = useState(datasets[0].id);
+
+  const [images, setImages] = useState([]);
+
   const setSelectedDatasetId = (id) => {
     return setDataset(id);
   };
 
   useEffect(() => {
 
-    //api call
+    getImages()
+
+    
   }, [selectedDateset])
->>>>>>> d8d4c54477b9006aea902370ce755b36edd74780
+
+  const getImages = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:5000/getimages?dataset=${encodeURIComponent(selectedDateset)}`);
+      const data = await response.json();
+      setImages(data.map(d => { 
+        const decodedImage = atob(d.image)
+        const byteArray = new Uint8Array(decodedImage.length);
+        for (let i = 0; i < decodedImage.length; i++) {
+          byteArray[i] = decodedImage.charCodeAt(i);
+        }
+
+        // Create a blob URL for the image
+        const blob = new Blob([byteArray], { type: 'image/jpeg' });
+        const imageUrl = URL.createObjectURL(blob);
+
+        return {
+          'image': imageUrl,
+          'title': d.organ,
+          'caption' : `This is an image of ${d.organ}` ,
+          'id' : d.image_name
+        }
+       }))
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
 
   return (
     <div>
@@ -102,7 +127,7 @@ const VQAMain = () => {
         onDatasetClick={setSelectedDatasetId}
         selectedDataset={selectedDateset}
       />
-      <VQAImages images={data} />
+      <VQAImages images={images} />
     </div>
   );
 };
