@@ -1,17 +1,49 @@
 import { Box, Chip, TextField, Typography } from "@mui/material";
 import React from "react";
 import DoneIcon from "@mui/icons-material/Done";
+import EastIcon from "@mui/icons-material/East";
 
-const VQAHeader = ({ datasets, onDatasetClick, searchQueury, onChangeSearch, selectedDataset = "roco" }) => {
+const VQAHeader = ({
+  datasets,
+  onDatasetClick,
+  searchQueury,
+  onChangeSearch,
+  selectedDataset,
+}) => {
   return (
-    <Box px={8} py={1} pb={1} display={"flex"} alignItems={"center"} position={"fixed"} top={0} width={1} zIndex={100} bgcolor={"#e8efeb"}>
+    <Box
+      px={8}
+      py={1}
+      pb={1}
+      display={"flex"}
+      alignItems={"center"}
+      position={"fixed"}
+      top={0}
+      width={1}
+      zIndex={100}
+      bgcolor={"#e8efeb"}
+    >
       <Box>
-        <img src={"/logo.svg"} style={{height: 48}} />
+        <img src={"/logo.svg"} style={{ height: 48 }} />
       </Box>
-      <Box px={2} width={.4} >
-        <TextField fullWidth id="standard-basic" placeholder="Search" variant="standard" value={searchQueury} onChange={onChangeSearch} />
+      <Box px={2} width={0.4}>
+        <TextField
+          fullWidth
+          id="standard-basic"
+          placeholder="Search"
+          variant="standard"
+          value={searchQueury}
+          onChange={onChangeSearch}
+        />
       </Box>
       <Box flexGrow={1} />
+      {!selectedDataset && (
+        <Box pr={3} display={"flex"} gap={2} className="fade-in-out">
+          <Typography>Please select the dataset</Typography>
+          <EastIcon />
+        </Box>
+      )}
+
       <Box gap={2} display={"flex"}>
         {datasets.map((dataset) => (
           <Chip
@@ -27,7 +59,6 @@ const VQAHeader = ({ datasets, onDatasetClick, searchQueury, onChangeSearch, sel
   );
 };
 
-const styles = {
-};
+const styles = {};
 
 export default VQAHeader;
