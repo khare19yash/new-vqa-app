@@ -30,7 +30,7 @@ const VQAHeader = ({
         <TextField
           fullWidth
           id="standard-basic"
-          placeholder="Search"
+          placeholder="Chest, Brain, Tumor...."
           variant="standard"
           value={searchQueury}
           onChange={onChangeSearch}
