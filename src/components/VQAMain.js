@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import VQAImages from "./VQAImages";
 import VQAHeader from "./VQAHeader";
 import { Box } from "@mui/material";
@@ -252,17 +253,9 @@ const VQAMain = () => {
   const getImages = async () => {
     setIsLoading(true)
     try {
-      setTimeout(() => {
-
-        // fetch(`http://127.0.0.1:5000/getimages?dataset=${selectedDateset}`).then(response => {
-
-        //   const data = response.json(); 
-
-        // })
-
-      // const response = fetch(`http://127.0.0.1:5000/getimages?dataset=${selectedDateset}`);
-      // const data = await response.json();
-
+      axios.get(`http://127.0.0.1:5000/getimages?dataset=${selectedDateset}`).then(response => {
+        const data = response.data;
+        setIsLoading(false)
         // const data = a;
         const imagesRes = data.map((d) => {
           const decodedImage = atob(d.image);
@@ -277,8 +270,8 @@ const VQAMain = () => {
 
           return {
             image: imageUrl,
-            title: d.organ,
-            caption: `This is an image of ${d.organ}`,
+            title: d.title,
+            caption: d.caption,
             id: d.image_name,
           };
         });

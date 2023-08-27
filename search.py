@@ -114,13 +114,12 @@ def load_image():
 @cross_origin()
 def get_images():
     dataset = request.args.get('dataset')
-    data = []
     if dataset == 'vqarad':
         data = get_vqarad_images()
     elif dataset == 'deepeyenet':
         data = get_deepeyenet_images()
-
-
+    else:
+        data = []
     return jsonify(data)
 
 
@@ -159,13 +158,26 @@ def get_deepeyenet_images():
                 'image': encoded_image,
                 'image_name': image_name,
                 'caption': caption,
-                'keywords': keywords
+                'title': keywords
             })
             if i == 1000:
                 break
     return data
 
 
+
+@app.route('/getimages',methods=['POST'])
+@cross_origin()
+def get_images():
+    dataset = request.args.get('dataset')
+    if dataset == 'vqarad':
+        data = get_vqarad_images()
+    elif dataset == 'deepeyenet':
+        data = get_deepeyenet_images()
+    else:
+        data = []
+    return jsonify(data)
+    
 
     
       
