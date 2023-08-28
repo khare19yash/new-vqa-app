@@ -144,7 +144,7 @@ const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
           },
         ]);
 
-      }, 1000);
+      });
     } catch (error) {
       console.error(error);
     }
@@ -217,7 +217,7 @@ const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
           },
         ]);
         setText("");
-      }, 1000);
+      });
     } catch (error) {
       console.error(error);
     }
@@ -225,7 +225,7 @@ const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
 
 
   return (
-    <Dialog open={true} onClose={onClose}>
+    <Dialog open={true} onClose={onClose} maxWidth="lg">
       <DialogContent ref={divRef} component={Box}>
         <ChatBox chats={chats} onClickQuestion={onClickQuestion} />
         <TextField
