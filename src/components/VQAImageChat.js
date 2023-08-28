@@ -225,7 +225,7 @@ const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
 
 
   return (
-    <Dialog open={true} onClose={onClose} maxWidth="lg">
+    <Dialog open={true} onClose={onClose} fullWidth maxWidth="lg">
       <DialogContent ref={divRef} component={Box}>
         <ChatBox chats={chats} onClickQuestion={onClickQuestion} />
         <TextField
