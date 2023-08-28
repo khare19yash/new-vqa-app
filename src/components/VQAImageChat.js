@@ -212,7 +212,7 @@ const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
         setChats([
           ...chats,
           {
-            type: "user",
+            type: "ai",
             message: answer,
           },
         ]);

@@ -127,8 +127,6 @@ def load_image():
         'answers' : answers
     })
 
-
-
 @app.route('/getimages',methods=['GET'])
 @cross_origin()
 def get_images():
@@ -184,21 +182,35 @@ def get_deepeyenet_images():
     return data
 
 
+@app.route('/search',methods=['POST'])
+@cross_origin()
+def search_images():
+    try:
+        data = request.get_json()
+        dataset = data['dataset']
+        query = data['query']
 
-# @app.route('/getimages',methods=['POST'])
-# @cross_origin()
-# def get_images():
-#     dataset = request.args.get('dataset')
-#     if dataset == 'vqarad':
-#         data = get_vqarad_images()
-#     elif dataset == 'deepeyenet':
-#         data = get_deepeyenet_images()
-#     else:
-#         data = []
-#     return jsonify(data)
-
-
-    
+        collection = db[dataset]
+        results = collection.find({ "$text": { "$search": query }},{ "score": { "$meta": "textScore" } }).sort([("score", {"$meta": "textScore"})])
+        data = []
+        if results:
+            for i,result in enumerate(results):
+                image_data = result['image']
+                image_name = result['image_name']
+                caption = result['caption']
+                keywords = result['keywords']
+                encoded_image = base64.b64encode(image_data).decode('utf-8')
+                data.append({
+                    'image': encoded_image,
+                    'image_name': image_name,
+                    'caption': caption,
+                    'title': keywords
+                })
+                if i == 100:
+                    break
+        return jsonify(data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
       
 
 
