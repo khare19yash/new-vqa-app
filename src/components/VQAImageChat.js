@@ -44,7 +44,7 @@ const ChatBox = ({ chats, onClickQuestion }) => {
                 borderRadius={"16px"}
                 bgcolor={chat.type !== "user" ? "#adfbce" : "#eeeeee"}
               >
-                <img src={chat.message} style={{ maxWidth: "200px" }} />
+                <img src={chat.message} style={{ maxWidth: "500px" }} />
               </Box>
             </Box>
           );
@@ -225,7 +225,7 @@ const VQAImageChat = ({ onClose, imageUrl, imageName, dataset }) => {
 
 
   return (
-    <Dialog open={true} onClose={onClose} fullWidth maxWidth="lg">
+    <Dialog open={true} onClose={onClose} fullWidth maxWidth="sm">
       <DialogContent ref={divRef} component={Box}>
         <ChatBox chats={chats} onClickQuestion={onClickQuestion} />
         <TextField
